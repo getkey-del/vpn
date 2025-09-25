@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kraken UI - Elegance</title>
+    <title>KRAKEN VPN - Защита вашей приватности</title>
     <!-- Подключение иконок Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -17,7 +17,7 @@
             --base-bg-2: #1e1e1e;
             --error-color: #ff4757;
             --success-color: #2ed573;
-            --power-button-size: 180px;
+            --power-button-size: 200px;
         }
         
         body {
@@ -32,6 +32,8 @@
             background: #0a0a0a;
             user-select: none;
             transition: background-color 0.5s, color 0.5s;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         body.light-theme {
@@ -44,12 +46,18 @@
         }
 
         .container {
-            width: 100%; max-width: 400px; height: 100vh; max-height: 800px;
+            width: 100%; 
+            max-width: 400px; 
+            height: 100%; 
+            max-height: 700px;
             background: rgba(20, 20, 20, 0.8);
             backdrop-filter: blur(30px);
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            display: flex; flex-direction: column; overflow: hidden; position: relative;
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            position: relative;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: background 0.5s, border-color 0.5s;
         }
@@ -61,20 +69,37 @@
         }
         
         .screen {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 40px; text-align: center; flex-grow: 1; box-sizing: border-box;
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; visibility: hidden;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            padding: 30px; 
+            text-align: center; 
+            flex-grow: 1; 
+            box-sizing: border-box;
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            opacity: 0; 
+            visibility: hidden;
             transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
             transform: translateX(20px);
         }
+        
         .screen.active { 
             opacity: 1; 
             visibility: visible; 
             transform: translateX(0);
             transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s, visibility 0.4s;
         }
-        h2 { font-weight: 400; margin-bottom: 25px; }
+        
+        h2 { 
+            font-weight: 400; 
+            margin-bottom: 25px; 
+            font-size: 1.4rem;
+        }
 
         body.light-theme h2 {
             color: #333;
@@ -91,6 +116,7 @@
             font-size: 16px; 
             text-align: center; 
             transition: border-color 0.3s;
+            box-sizing: border-box;
         }
 
         body.light-theme .input-field {
@@ -126,6 +152,7 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            box-sizing: border-box;
         }
 
         body.light-theme .styled-button {
@@ -205,8 +232,8 @@
         }
         
         .keypad-button { 
-            padding: 20px; 
-            font-size: 24px; 
+            padding: 18px; 
+            font-size: 22px; 
             background: rgba(255,255,255,0.05); 
             color: var(--text-color); 
             border: 1px solid rgba(255,255,255,0.1); 
@@ -264,7 +291,10 @@
             color: #4CAF50;
         }
 
-        #main-interface { justify-content: space-between; padding: 0; }
+        #main-interface { 
+            justify-content: space-between; 
+            padding: 0; 
+        }
         
         .main-header { 
             display: flex; 
@@ -272,6 +302,7 @@
             justify-content: space-between; 
             padding: 20px; 
             width: calc(100% - 40px); 
+            box-sizing: border-box;
         }
         
         .logo-container {
@@ -280,13 +311,13 @@
         }
         
         .logo { 
-            width: 50px; 
-            height: 50px; 
-            margin-right: 15px; 
+            width: 40px; 
+            height: 40px; 
+            margin-right: 12px; 
         }
         
         .header-text { 
-            font-size: 24px; 
+            font-size: 20px; 
             font-weight: 700; 
         }
 
@@ -307,60 +338,146 @@
             color: #666;
         }
         
-        .main-content { display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; }
+        .main-content { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            flex-grow: 1; 
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        
+        /* 3D КНОПКА ВКЛЮЧЕНИЯ */
+        .power-button-container {
+            position: relative;
+            width: var(--power-button-size);
+            height: var(--power-button-size);
+            margin: 20px 0;
+        }
         
         .power-button {
-            width: var(--power-button-size); 
-            height: var(--power-button-size); 
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            background: linear-gradient(145deg, var(--base-bg-2), var(--base-bg-1));
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.5), -10px -10px 20px rgba(255,255,255,0.05);
-            display: flex; 
-            justify-content: center; 
+            background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
+            box-shadow: 
+                10px 10px 20px rgba(0, 0, 0, 0.6),
+                -10px -10px 20px rgba(255, 255, 255, 0.05),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
             align-items: center;
-            cursor: pointer; 
+            cursor: pointer;
             transition: all 0.5s ease;
-            color: #555; 
+            color: #666;
             font-size: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .power-button:before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #1a1a1a, #2c2c2c);
+            box-shadow: 
+                inset 5px 5px 10px rgba(0, 0, 0, 0.6),
+                inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+            z-index: -1;
         }
 
         body.light-theme .power-button {
             background: linear-gradient(145deg, #e6e6e6, #ffffff);
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.1), -10px -10px 20px rgba(255,255,255,0.5);
+            box-shadow: 
+                10px 10px 20px rgba(0, 0, 0, 0.1),
+                -10px -10px 20px rgba(255, 255, 255, 0.5),
+                inset 0 0 0 2px rgba(0, 0, 0, 0.05);
             color: #333;
+        }
+
+        body.light-theme .power-button:before {
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            box-shadow: 
+                inset 5px 5px 10px rgba(0, 0, 0, 0.1),
+                inset -5px -5px 10px rgba(255, 255, 255, 0.5);
         }
         
         .power-button.active {
-            background: var(--success-color); 
-            color: white; 
+            background: linear-gradient(145deg, #25c95e, #1e9c4a);
+            color: white;
             font-size: 65px;
-            box-shadow: inset 8px 8px 16px rgba(0, 0, 0, 0.2), 
-                        inset -8px -8px 16px rgba(255, 255, 255, 0.2),
-                        0 0 25px rgba(46, 213, 115, 0.5);
+            box-shadow: 
+                0 0 0 4px rgba(46, 213, 115, 0.3),
+                10px 10px 20px rgba(0, 0, 0, 0.5),
+                -10px -10px 20px rgba(255, 255, 255, 0.05);
             animation: pulse-glow-green 2s infinite ease-in-out;
+        }
+
+        .power-button.active:before {
+            background: linear-gradient(145deg, #1e9c4a, #25c95e);
+            box-shadow: 
+                inset 5px 5px 10px rgba(0, 0, 0, 0.3),
+                inset -5px -5px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        body.light-theme .power-button.active {
+            background: linear-gradient(145deg, #25c95e, #1e9c4a);
+            box-shadow: 
+                0 0 0 4px rgba(46, 213, 115, 0.3),
+                10px 10px 20px rgba(0, 0, 0, 0.1),
+                -10px -10px 20px rgba(255, 255, 255, 0.5);
+        }
+
+        body.light-theme .power-button.active:before {
+            background: linear-gradient(145deg, #1e9c4a, #25c95e);
+        }
+        
+        /* Эффект нажатия */
+        .power-button:active {
+            transform: scale(0.95);
+            box-shadow: 
+                5px 5px 15px rgba(0, 0, 0, 0.5),
+                -5px -5px 15px rgba(255, 255, 255, 0.05),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.05);
+        }
+
+        .power-button.active:active {
+            transform: scale(0.95);
+            box-shadow: 
+                0 0 0 4px rgba(46, 213, 115, 0.3),
+                5px 5px 15px rgba(0, 0, 0, 0.5),
+                -5px -5px 15px rgba(255, 255, 255, 0.05);
         }
         
         @keyframes pulse-glow-green {
             0% { 
-                box-shadow: inset 8px 8px 16px rgba(0, 0, 0, 0.2), 
-                            inset -8px -8px 16px rgba(255, 255, 255, 0.2),
-                            0 0 20px rgba(46, 213, 115, 0.4); 
+                box-shadow: 
+                    0 0 0 4px rgba(46, 213, 115, 0.3),
+                    10px 10px 20px rgba(0, 0, 0, 0.5),
+                    -10px -10px 20px rgba(255, 255, 255, 0.05);
             }
             50% { 
-                box-shadow: inset 8px 8px 16px rgba(0, 0, 0, 0.2), 
-                            inset -8px -8px 16px rgba(255, 255, 255, 0.2),
-                            0 0 35px rgba(46, 213, 115, 0.7); 
+                box-shadow: 
+                    0 0 0 8px rgba(46, 213, 115, 0.5),
+                    10px 10px 20px rgba(0, 0, 0, 0.5),
+                    -10px -10px 20px rgba(255, 255, 255, 0.05);
             }
             100% { 
-                box-shadow: inset 8px 8px 16px rgba(0, 0, 0, 0.2), 
-                            inset -8px -8px 16px rgba(255, 255, 255, 0.2),
-                            0 0 20px rgba(46, 213, 115, 0.4); 
+                box-shadow: 
+                    0 0 0 4px rgba(46, 213, 115, 0.3),
+                    10px 10px 20px rgba(0, 0, 0, 0.5),
+                    -10px -10px 20px rgba(255, 255, 255, 0.05);
             }
         }
         
         .server-status, .traffic-status { 
-            margin-top: 30px; 
-            font-size: 16px; 
+            margin-top: 25px; 
+            font-size: 15px; 
             color: var(--text-secondary-color); 
             font-weight: 300; 
             display: flex;
@@ -397,7 +514,7 @@
         
         .traffic-status { 
             margin-top: 15px; 
-            font-weight: 700; /* Жирный текст для статуса соединения */
+            font-weight: 700;
         }
         
         .traffic-info { 
@@ -407,7 +524,7 @@
             opacity: 0; 
             visibility: hidden; 
             margin-top: 15px; 
-            font-size: 16px; 
+            font-size: 15px; 
             color: var(--text-color); 
             transition: all 0.5s; 
         }
@@ -424,12 +541,16 @@
             color: #666;
         }
 
-        .bottom-nav-container { width: 100%; position: absolute; bottom: 0; }
+        .bottom-nav-container { 
+            width: 100%; 
+            position: absolute; 
+            bottom: 0; 
+        }
         
         .bottom-nav { 
             display: flex; 
             justify-content: space-around; 
-            padding: 10px 0 20px 0; 
+            padding: 10px 0 15px 0; 
             background: rgba(0, 0, 0, 0.2); 
             border-top: 1px solid rgba(255, 255, 255, 0.1); 
         }
@@ -444,12 +565,13 @@
             border: none; 
             color: #888; 
             cursor: pointer; 
-            font-size: 12px; 
+            font-size: 11px; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             gap: 5px; 
             transition: all 0.3s; 
+            padding: 5px;
         }
         
         .nav-button:hover { color: #ccc; transform: translateY(-2px); }
@@ -468,16 +590,23 @@
             color: #4CAF50;
         }
         
-        .nav-button i { font-size: 22px; }
+        .nav-button i { font-size: 20px; }
 
-        .server-list { width: 100%; list-style: none; padding: 0; margin: 0; }
+        .server-list { 
+            width: 100%; 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            max-height: 350px;
+            overflow-y: auto;
+        }
         
         .server-item, .settings-item { 
             display: flex; 
             align-items: center; 
-            padding: 15px; 
+            padding: 12px; 
             background-color: rgba(255,255,255,0.05); 
-            margin-bottom: 10px; 
+            margin-bottom: 8px; 
             border-radius: 10px; 
             cursor: pointer; 
             transition: all 0.2s; 
@@ -500,7 +629,7 @@
             background-color: rgba(0, 0, 0, 0.1);
         }
         
-        .server-item span { font-size: 20px; margin-right: 15px; width: 25px; text-align: center; }
+        .server-item span { font-size: 18px; margin-right: 12px; width: 25px; text-align: center; }
         
         .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
         
@@ -566,6 +695,95 @@
         .fade-in {
             animation: fadeIn 0.5s ease forwards;
         }
+
+        /* Мобильная адаптация */
+        @media (max-width: 480px) {
+            .container {
+                max-height: 100%;
+                border-radius: 0;
+            }
+            
+            .screen {
+                padding: 20px;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+            }
+            
+            .power-button-container {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .power-button {
+                font-size: 55px;
+            }
+            
+            .power-button.active {
+                font-size: 60px;
+            }
+            
+            .main-header {
+                padding: 15px;
+            }
+            
+            .logo {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .header-text {
+                font-size: 18px;
+            }
+            
+            .bottom-nav {
+                padding: 8px 0 12px 0;
+            }
+            
+            .nav-button i {
+                font-size: 18px;
+            }
+            
+            .nav-button span {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .screen {
+                padding: 15px;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .input-field {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .power-button-container {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .power-button {
+                font-size: 50px;
+            }
+            
+            .power-button.active {
+                font-size: 55px;
+            }
+            
+            .server-status, .traffic-status {
+                margin-top: 15px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -573,14 +791,14 @@
     <div class="container">
         <!-- ЭКРАН 1: ВВОД НИКНЕЙМА -->
         <div id="nickname-screen" class="screen active">
-            <h2>Пожалуйста, введите свой никнейм на кракен</h2>
+            <h2>Введите ваш никнейм</h2>
             <input type="text" id="nickname-input" class="input-field" placeholder="Ваш никнейм" autocomplete="off">
             <button id="continue-to-code" class="styled-button">Продолжить</button>
         </div>
 
         <!-- ЭКРАН 2: ВВОД КОДА -->
         <div id="code-screen" class="screen">
-            <h2>Пожалуйста, введите код, отправленный на кракен</h2>
+            <h2>Введите код подтверждения</h2>
             <div class="code-input-container">
                 <input type="text" id="code-input" class="input-field" readonly>
                 <button class="clear-code" title="Очистить"><i class="fas fa-backspace"></i></button>
@@ -605,14 +823,16 @@
         <div id="main-interface" class="screen">
             <div class="main-header">
                 <div class="logo-container">
-                    <img src="kraken.png" alt="logo" class="logo">
-                    <span class="header-text">kra37.cc</span>
+                    <img src="krak.png" alt="logo" class="logo">
+                    <span class="header-text">KRAKEN VPN</span>
                 </div>
                 <div id="username-display" class="username-display"></div>
             </div>
             <div class="main-content">
-                <div id="power-button" class="power-button">
-                    <i class="fa-solid fa-power-off"></i>
+                <div class="power-button-container">
+                    <div id="power-button" class="power-button">
+                        <i class="fa-solid fa-power-off"></i>
+                    </div>
                 </div>
                 <div class="server-status">
                     <i class="fas fa-server"></i>
@@ -632,7 +852,7 @@
             </div>
             <div class="bottom-nav-container">
                 <div class="bottom-nav">
-                    <button class="nav-button active" data-target="main-interface"><i class="fa-solid fa-house"></i><span>Меню</span></button>
+                    <button class="nav-button active" data-target="main-interface"><i class="fa-solid fa-house"></i><span>Главная</span></button>
                     <button class="nav-button" data-target="server-screen"><i class="fa-solid fa-server"></i><span>Серверы</span></button>
                     <button class="nav-button" data-target="settings-screen"><i class="fa-solid fa-gear"></i><span>Настройки</span></button>
                 </div>
@@ -643,15 +863,15 @@
         <div id="server-screen" class="screen">
             <h2>Выберите сервер</h2>
             <ul class="server-list">
-                <li class="server-item" data-server="США"><span>🇺🇸</span> США</li>
-                <li class="server-item" data-server="Германия"><span>🇩🇪</span> Германия</li>
-                <li class="server-item" data-server="Япония"><span>🇯🇵</span> Япония</li>
-                <li class="server-item" data-server="Великобритания"><span>🇬🇧</span> Великобритания</li>
-                <li class="server-item" data-server="Канада"><span>🇨🇦</span> Канада</li>
+                <li class="server-item" data-server="США"><span>🇺🇸</span> США <span class="server-ping">25ms</span></li>
+                <li class="server-item" data-server="Германия"><span>🇩🇪</span> Германия <span class="server-ping">35ms</span></li>
+                <li class="server-item" data-server="Япония"><span>🇯🇵</span> Япония <span class="server-ping">120ms</span></li>
+                <li class="server-item" data-server="Великобритания"><span>🇬🇧</span> Великобритания <span class="server-ping">40ms</span></li>
+                <li class="server-item" data-server="Канада"><span>🇨🇦</span> Канада <span class="server-ping">45ms</span></li>
             </ul>
             <div class="bottom-nav-container">
                  <div class="bottom-nav">
-                    <button class="nav-button" data-target="main-interface"><i class="fa-solid fa-house"></i><span>Меню</span></button>
+                    <button class="nav-button" data-target="main-interface"><i class="fa-solid fa-house"></i><span>Главная</span></button>
                     <button class="nav-button active" data-target="server-screen"><i class="fa-solid fa-server"></i><span>Серверы</span></button>
                     <button class="nav-button" data-target="settings-screen"><i class="fa-solid fa-gear"></i><span>Настройки</span></button>
                 </div>
@@ -664,10 +884,11 @@
             <div class="settings-item"><span>Запускать при старте</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
             <div class="settings-item"><span>Блокировка рекламы</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
             <div class="settings-item"><span>Уведомления</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            <div class="settings-item"><span>Автоподключение</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
             <div class="settings-item"><span>Светлая тема</span><label class="switch"><input type="checkbox" id="theme-switcher"><span class="slider"></span></label></div>
             <div class="bottom-nav-container">
                  <div class="bottom-nav">
-                    <button class="nav-button" data-target="main-interface"><i class="fa-solid fa-house"></i><span>Меню</span></button>
+                    <button class="nav-button" data-target="main-interface"><i class="fa-solid fa-house"></i><span>Главная</span></button>
                     <button class="nav-button" data-target="server-screen"><i class="fa-solid fa-server"></i><span>Серверы</span></button>
                     <button class="nav-button active" data-target="settings-screen"><i class="fa-solid fa-gear"></i><span>Настройки</span></button>
                 </div>
