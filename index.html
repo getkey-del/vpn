@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KRAKEN VPN</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- РЕШЕНИЕ: Подключен шрифт Google Sans через сторонний источник -->
+    <!-- Подключен шрифт Google Sans -->
     <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet">
     <style>
         * {
@@ -44,7 +44,7 @@
         }
 
         body {
-            /* РЕШЕНИЕ: Применен шрифт Google Sans */
+            /* Применен шрифт Google Sans */
             font-family: 'Google Sans', sans-serif;
             background: var(--body-bg);
             color: var(--text-color);
@@ -89,7 +89,7 @@
         
         #main-interface, #server-screen, #settings-screen {
              justify-content: flex-start;
-             padding-bottom: 90px; /* Отступ для нижней навигации */
+             padding-bottom: 90px;
         }
 
 
@@ -241,9 +241,10 @@
             width: 100%;
         }
 
+        /* РЕШЕНИЕ: Кнопка включения увеличена */
         .power-button {
-            width: 200px;
-            height: 200px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
             background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
             box-shadow: 
@@ -282,8 +283,9 @@
             background: linear-gradient(145deg, #1e9c4a, #25c95e);
         }
 
+        /* РЕШЕНИЕ: Иконка увеличена пропорционально кнопке */
         .power-icon {
-            font-size: 70px;
+            font-size: 85px;
             color: #666;
             position: relative;
             z-index: 2;
@@ -442,12 +444,12 @@
             }
             
             .power-button {
-                width: 180px;
-                height: 180px;
+                width: 200px;
+                height: 200px;
             }
             
             .power-icon {
-                font-size: 60px;
+                font-size: 70px;
             }
         }
 
@@ -457,13 +459,13 @@
                 justify-content: flex-start;
             }
             .power-button {
-                width: 160px;
-                height: 160px;
+                width: 180px;
+                height: 180px;
                 margin-top: 10px;
             }
             
             .power-icon {
-                font-size: 50px;
+                font-size: 60px;
             }
             
             h2 {
@@ -636,7 +638,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Элементы
             const screens = document.querySelectorAll('.screen');
             const continueBtn = document.getElementById('continue-to-code');
             const nicknameInput = document.getElementById('nickname-input');
@@ -655,12 +656,10 @@
             const forgotCodeLink = document.querySelector('.forgot-code');
             const themeSwitcher = document.getElementById('theme-switcher');
 
-            // Состояние
             let isConnected = false;
             let code = '';
             let trafficInterval;
 
-            // Функция переключения экранов
             function showScreen(screenId) {
                 screens.forEach(screen => {
                     screen.classList.remove('active');
