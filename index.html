@@ -44,7 +44,6 @@
         }
 
         body {
-            /* Применен шрифт Google Sans */
             font-family: 'Google Sans', sans-serif;
             background: var(--body-bg);
             color: var(--text-color);
@@ -77,25 +76,33 @@
             left: 0;
             width: 100%;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .screen.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Контейнер для контента, который может скроллиться */
+        .content-area {
+            flex: 1;
+            width: 100%;
             padding: 40px 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
+            overflow-y: auto; /* Позволяет скроллить контент, если он не влезает */
         }
         
-        #main-interface, #server-screen, #settings-screen {
-             justify-content: flex-start;
-             padding-bottom: 90px;
-        }
-
-
-        .screen.active {
-            opacity: 1;
-            visibility: visible;
+        #main-interface .content-area {
+            justify-content: flex-start;
         }
 
         h2 {
@@ -212,9 +219,6 @@
         .logo {
             width: 80px;
             height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .header-text {
@@ -231,17 +235,15 @@
             white-space: nowrap;
         }
 
-        .main-content {
-            flex: 1;
+        .main-content-wrapper {
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 0 20px;
-            width: 100%;
+            flex-grow: 1; /* Занимает доступное пространство */
         }
-
-        /* РЕШЕНИЕ: Кнопка включения увеличена */
+        
         .power-button {
             width: 240px;
             height: 240px;
@@ -283,7 +285,6 @@
             background: linear-gradient(145deg, #1e9c4a, #25c95e);
         }
 
-        /* РЕШЕНИЕ: Иконка увеличена пропорционально кнопке */
         .power-icon {
             font-size: 85px;
             color: #666;
@@ -331,10 +332,7 @@
         }
 
         .bottom-nav {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             display: flex;
             justify-content: space-around;
             padding: 15px 0;
@@ -368,8 +366,6 @@
         .scrollable-list {
             width: 100%;
             list-style: none;
-            max-height: calc(100% - 150px);
-            overflow-y: auto;
         }
 
         .list-item {
@@ -434,42 +430,33 @@
 
         @media (max-width: 480px) {
             .container {
+                height: 100%;
                 max-height: 100vh;
                 border-radius: 0;
                 border: none;
             }
-            
-            .screen {
-                padding: 30px 20px;
+             .content-area {
+                padding: 15px 20px;
             }
-            
-            .power-button {
+        }
+        
+        @media (max-height: 750px) {
+             .power-button {
                 width: 200px;
                 height: 200px;
             }
-            
             .power-icon {
                 font-size: 70px;
             }
         }
 
-        @media (max-height: 700px) {
-            .main-content {
-                padding-top: 10px;
-                justify-content: flex-start;
-            }
+        @media (max-height: 650px) {
             .power-button {
-                width: 180px;
-                height: 180px;
-                margin-top: 10px;
+                width: 160px;
+                height: 160px;
             }
-            
             .power-icon {
-                font-size: 60px;
-            }
-            
-            h2 {
-                margin-bottom: 20px;
+                font-size: 55px;
             }
         }
     </style>
@@ -478,67 +465,73 @@
     <div class="container">
         <!-- ЭКРАН НИКНЕЙМА -->
         <div id="nickname-screen" class="screen active">
-            <h2>Введите ваш никнейм на кракен</h2>
-            <input type="text" id="nickname-input" class="input-field" placeholder="Ваш никнейм" autocomplete="off">
-            <button id="continue-to-code" class="styled-button">Продолжить</button>
+            <div class="content-area">
+                <h2>Введите ваш никнейм на кракен</h2>
+                <input type="text" id="nickname-input" class="input-field" placeholder="Ваш никнейм" autocomplete="off">
+                <button id="continue-to-code" class="styled-button">Продолжить</button>
+            </div>
         </div>
 
         <!-- ЭКРАН КОДА -->
         <div id="code-screen" class="screen">
-            <h2>Введите код подтверждения</h2>
-            <div class="code-input-container">
-                <input type="text" id="code-input" class="input-field" readonly placeholder="••••••">
-                <button class="clear-code"><i class="fas fa-backspace"></i></button>
+            <div class="content-area">
+                <h2>Введите код подтверждения</h2>
+                <div class="code-input-container">
+                    <input type="text" id="code-input" class="input-field" readonly placeholder="••••••">
+                    <button class="clear-code"><i class="fas fa-backspace"></i></button>
+                </div>
+                <div class="keypad">
+                    <button class="keypad-button">1</button>
+                    <button class="keypad-button">2</button>
+                    <button class="keypad-button">3</button>
+                    <button class="keypad-button">4</button>
+                    <button class="keypad-button">5</button>
+                    <button class="keypad-button">6</button>
+                    <button class="keypad-button">7</button>
+                    <button class="keypad-button">8</button>
+                    <button class="keypad-button">9</button>
+                    <button class="keypad-button delete" style="grid-column: 1 / 2;">
+                        <i class="fas fa-backspace"></i>
+                    </button>
+                    <button class="keypad-button zero" style="grid-column: 2 / 3;">0</button>
+                </div>
+                <a href="#" class="forgot-code">Не получили код?</a>
             </div>
-            <div class="keypad">
-                <button class="keypad-button">1</button>
-                <button class="keypad-button">2</button>
-                <button class="keypad-button">3</button>
-                <button class="keypad-button">4</button>
-                <button class="keypad-button">5</button>
-                <button class="keypad-button">6</button>
-                <button class="keypad-button">7</button>
-                <button class="keypad-button">8</button>
-                <button class="keypad-button">9</button>
-                <button class="keypad-button delete" style="grid-column: 1 / 2;">
-                    <i class="fas fa-backspace"></i>
-                </button>
-                <button class="keypad-button zero" style="grid-column: 2 / 3;">0</button>
-            </div>
-            <a href="#" class="forgot-code">Не получили код?</a>
         </div>
 
         <!-- ГЛАВНЫЙ ЭКРАН -->
         <div id="main-interface" class="screen">
-            <div class="main-header">
-                <div class="logo-container">
-                    <img src="krak.png" alt="logo" class="logo">
-                    <div class="header-text">KRAKEN VPN</div>
-                </div>
-                <div id="username-display" class="username-display"></div>
-            </div>
-            
-            <div class="main-content">
-                <div class="power-button" id="power-button">
-                    <i class="fas fa-power-off power-icon"></i>
+            <div class="content-area">
+                <div class="main-header">
+                    <div class="logo-container">
+                        <img src="krak.png" alt="logo" class="logo">
+                        <div class="header-text">KRAKEN VPN</div>
+                    </div>
+                    <div id="username-display" class="username-display"></div>
                 </div>
                 
-                <div class="server-status">
-                    <i class="fas fa-server"></i>
-                    Сервер: <span id="selected-server">США</span>
-                    <button class="change-server-btn">
-                        <i class="fas fa-exchange-alt"></i>
-                    </button>
-                </div>
-                
-                <div class="traffic-status">
-                    <i class="fas fa-shield-alt"></i>
-                    <span id="connection-status">Соединение неактивно</span>
-                </div>
-                
-                <div class="traffic-info" id="traffic-info">
-                    <div><i class="fas fa-download"></i> <span id="download-speed">0.00</span> MB/s</div>
-                    <div><i class="fas fa-upload"></i> <span id="upload-speed">0.00</span> MB/s</div>
+                <div class="main-content-wrapper">
+                    <div class="power-button" id="power-button">
+                        <i class="fas fa-power-off power-icon"></i>
+                    </div>
+                    
+                    <div class="server-status">
+                        <i class="fas fa-server"></i>
+                        Сервер: <span id="selected-server">США</span>
+                        <button class="change-server-btn">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="traffic-status">
+                        <i class="fas fa-shield-alt"></i>
+                        <span id="connection-status">Соединение неактивно</span>
+                    </div>
+                    
+                    <div class="traffic-info" id="traffic-info">
+                        <div><i class="fas fa-download"></i> <span id="download-speed">0.00</span> MB/s</div>
+                        <div><i class="fas fa-upload"></i> <span id="upload-speed">0.00</span> MB/s</div>
+                    </div>
                 </div>
             </div>
             
@@ -560,14 +553,16 @@
 
         <!-- ЭКРАН СЕРВЕРОВ -->
         <div id="server-screen" class="screen">
-            <h2>Выберите сервер</h2>
-            <ul class="scrollable-list">
-                <li class="server-item list-item" data-server="США"><span>🇺🇸</span> США</li>
-                <li class="server-item list-item" data-server="Германия"><span>🇩🇪</span> Германия</li>
-                <li class="server-item list-item" data-server="Япония"><span>🇯🇵</span> Япония</li>
-                <li class="server-item list-item" data-server="Великобритания"><span>🇬🇧</span> Великобритания</li>
-                <li class="server-item list-item" data-server="Канада"><span>🇨🇦</span> Канада</li>
-            </ul>
+            <div class="content-area">
+                <h2>Выберите сервер</h2>
+                <ul class="scrollable-list">
+                    <li class="server-item list-item" data-server="США"><span>🇺🇸</span> США</li>
+                    <li class="server-item list-item" data-server="Германия"><span>🇩🇪</span> Германия</li>
+                    <li class="server-item list-item" data-server="Япония"><span>🇯🇵</span> Япония</li>
+                    <li class="server-item list-item" data-server="Великобритания"><span>🇬🇧</span> Великобритания</li>
+                    <li class="server-item list-item" data-server="Канада"><span>🇨🇦</span> Канада</li>
+                </ul>
+            </div>
             
             <div class="bottom-nav">
                 <button class="nav-button" data-target="main-interface">
@@ -587,37 +582,39 @@
 
         <!-- ЭКРАН НАСТРОЕК -->
         <div id="settings-screen" class="screen">
-            <h2>Настройки</h2>
-            <ul class="scrollable-list">
-                <li class="settings-item list-item">
-                    <span>Запускать при старте</span>
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider"></span>
-                    </label>
-                </li>
-                <li class="settings-item list-item">
-                    <span>Блокировка рекламы</span>
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider"></span>
-                    </label>
-                </li>
-                <li class="settings-item list-item">
-                    <span>Уведомления</span>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </li>
-                <li class="settings-item list-item">
-                    <span>Светлая тема</span>
-                    <label class="switch">
-                        <input type="checkbox" id="theme-switcher">
-                        <span class="slider"></span>
-                    </label>
-                </li>
-            </ul>
+            <div class="content-area">
+                <h2>Настройки</h2>
+                <ul class="scrollable-list">
+                    <li class="settings-item list-item">
+                        <span>Запускать при старте</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </li>
+                    <li class="settings-item list-item">
+                        <span>Блокировка рекламы</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </li>
+                    <li class="settings-item list-item">
+                        <span>Уведомления</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </li>
+                    <li class="settings-item list-item">
+                        <span>Светлая тема</span>
+                        <label class="switch">
+                            <input type="checkbox" id="theme-switcher">
+                            <span class="slider"></span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
             
             <div class="bottom-nav">
                 <button class="nav-button" data-target="main-interface">
